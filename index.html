@@ -43,16 +43,16 @@
       }).addTo(mymap);
 
       // add marker to current location
-      // var marker = L.marker([here.lat, here.lon]).addTo(mymap);
-      // marker.bindPopup("You are <b>here</b>").openPopup();
+      var marker = L.marker([here.lat, here.lon]).addTo(mymap);
+      marker.bindPopup("You are <b>here</b>").openPopup();
 
       // add circle to current location
-      // var circle = L.circle([here.lat, here.lon], {
-      //   color: 'red',
-      //   fillColor: '#f03',
-      //   fillOpacity: 0.4,
-      //   radius: 100
-      // }).addTo(mymap);
+      var circle = L.circle([here.lat, here.lon], {
+        color: 'red',
+        fillColor: '#f03',
+        fillOpacity: 0.4,
+        radius: 100
+      }).addTo(mymap);
 
       // add routing from current location to updcs
       // L.Routing.control({
@@ -62,31 +62,31 @@
       //   ]
       // }).addTo(mymap);
 
-      // var geocoderoptions = {
-      //   collapsed: false, /* Whether its collapsed or not */
-      //   position: 'bottomleft', /* The position of the control */
-      //   text: 'Locate', /* The text of the submit button */
-      //   placeholder: '', /* The text of the search input placeholder */
-      //   callback: function (results) {
-      //     console.log(results);
-    	// 		var dst = results[0];
-      //     var bbox = dst.boundingbox;
-    	// 		var first = new L.LatLng(bbox[0], bbox[2]);
-    	// 		var second = new L.LatLng(bbox[1], bbox[3]);
-    	// 		var bounds = new L.LatLngBounds([first, second]);
-      //     this._map.fitBounds(bounds);
-      //
-      //     L.Routing.control({
-      //       waypoints: [
-      //         L.latLng(here.lat, here.lon),
-      //         L.latLng(dst.lat, dst.lon)
-      //       ]
-      //     }).addTo(mymap);
-      //   }
-      // };
-      //
-      // var osmGeocoder = new L.Control.OSMGeocoder(geocoderoptions);
-      // mymap.addControl(osmGeocoder);
+      var geocoderoptions = {
+        collapsed: false, /* Whether its collapsed or not */
+        position: 'bottomleft', /* The position of the control */
+        text: 'Locate', /* The text of the submit button */
+        placeholder: '', /* The text of the search input placeholder */
+        callback: function (results) {
+          console.log(results);
+    			var dst = results[0];
+          var bbox = dst.boundingbox;
+    			var first = new L.LatLng(bbox[0], bbox[2]);
+    			var second = new L.LatLng(bbox[1], bbox[3]);
+    			var bounds = new L.LatLngBounds([first, second]);
+          this._map.fitBounds(bounds);
+
+          L.Routing.control({
+            waypoints: [
+              L.latLng(here.lat, here.lon),
+              L.latLng(dst.lat, dst.lon)
+            ]
+          }).addTo(mymap);
+        }
+      };
+
+      var osmGeocoder = new L.Control.OSMGeocoder(geocoderoptions);
+      mymap.addControl(osmGeocoder);
     }
 
     getLocation();
